@@ -481,3 +481,65 @@ document.getElementById('importBtn').addEventListener('click',()=>{
 document.addEventListener('DOMContentLoaded', () => {
     updateUI();
 });
+// ========== Mastery Tracker Logic (FIXED) ===========
+
+function renderMastery(){
+    const el = document.getElementById('masteryList');
+    if (!el) return;
+    
+    el.innerHTML = '';
+    
+    // Sort by most recent date (date is a string, sorting helps keep recent items at top)
+    state.mastery.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // केवल नवीनतम 5 एंट्री दिखाएँ
+    state.mastery.slice(0, 5).forEach((m) => {
+        // ⭐ Star Rendering FIX: 
+        const stars = '⭐'.repeat(m.score);
+        
+        const div = document.createElement('div');
+        // HTML संरचना को सरल बनाया गया है ताकि डिस्प्ले की समस्या न हो
+        div.innerHTML = `<div class="small" style="margin-bottom: 3px;">
+            (${m.date}) <strong>${escapeHtml(m.topic)}</strong>: ${stars}
+        </div>`;
+        el.appendChild(div);
+    });
+}
+
+document.getElementById('saveMastery').addEventListener('click', () => {
+    const topic = document.getElementById('masteryTopic').value.trim();
+    const score = parseInt(document.getElementById('masteryScore').value);
+    
+    if (!topic) {
+        return alert('कृपया टॉपिक (Topic) का नाम दर्ज करें।');
+    }
+    if (score < 1 || score > 5 || isNaN(score)) {
+        return alert('मास्टरी स्कोर 1 और 5 के बीच होना चाहिए।');
+    }
+    
+    // नया Mastery ऑब्जेक्ट बनाएं
+    state.mastery.unshift({
+        topic: topic,
+        score: score,
+        // आज की तारीख को सही फ़ॉर्मेट में सेव करें
+        date: new Date().toLocaleDateString('en-IN') 
+    });
+    
+    state.mastery = state.mastery.slice(0, 20); 
+    
+    // डेटा को सेव करें (जो स्वतः ही updateUI() और renderMastery() को कॉल करेगा)
+    saveData(); 
+    notify(`Mastery for "${topic}" saved as ${score} stars!`);
+});
+
+//... (बाकी main.js कोड नीचे जारी रहेगा)
+// main.js (updateUI function)
+
+function updateUI(){
+  updateProgressUI();
+  renderFlash();
+  document.getElementById('pomCount').innerText = state.pomodoro.completed || 0;
+  renderReminders();
+  updateChart();
+  renderMastery(); // <--- यह कॉल यहाँ होनी चाहिए
+}
