@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Exam Ace Agent — Study Tool</title>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <link rel="stylesheet" href="style.css"> 
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "AI Exam Ace Agent",
+      "url": "https://example.com/ai-exam-ace-agent", 
+      "description": "An integrated study tool for students with progress tracking, mock tests, and notes enhancement.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://example.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>AI Exam Ace Agent — All Features</h1>
+  <div class="app">
+    <div class="left">
+
+      <div class="card" id="aiCard">
+        <div class="row" style="justify-content:space-between;align-items:center">
+          <div>
+            <strong>🤖 AI Notes & Mock-Maker</strong>
+            <div class="muted">Quick notes, mock MCQs and enhanced summaries</div>
+          </div>
+          <div class="flex">
+            <button id="saveNoteBtn">Save Note</button>
+            <button id="enhanceBtn">Enhance</button>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <label>Topic / Paste Notes</label>
+          <textarea id="inputNotes" rows="4" placeholder="Type question or paste notes..."></textarea>
+          <div style="margin-top:8px" class="controls">
+            <button id="generateBtn">Generate Notes</button>
+            <button id="mcqGenerateBtn">Make 10 MCQs</button>
+            <button id="flashGenBtn">Make Flashcards</button>
+            <button id="solveDoubtBtn" style="background:var(--accent-2); color:#061018;">❓ Solve Doubt</button>
+            <button id="ai" class ="ai"><a href="/index1.html" id="ai" class ="button-class-name" >ARTIFICIAL INTELLIGENCE FOR DOUBT </a>
+
+
+
+
+            <button id="voiceBtn" class="mic">🎤 Voice</button>
+          </div>
+        </div>
+
+        <div id="aiOutput" style="margin-top:12px"></div>
+      </div>
+
+      <div class="card">
+        <strong>📈 Progress Tracker & Daily Goals</strong>
+        <div class="muted">Track chapters, daily goals and streaks</div>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <div style="flex:1">
+            <label>Total Chapters</label>
+            <input id="totalCh" type="number" min="1" placeholder="e.g. 12">
+          </div>
+          <div style="flex:1">
+            <label>Completed Chapters</label>
+            <input id="doneCh" type="number" min="0" placeholder="e.g. 3">
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <label>Daily Goal (mins)</label>
+          <input id="dailyGoal" type="number" min="0" placeholder="e.g. 60">
+        </div>
+        <div style="margin-top:10px">
+          <div class="progress"><i id="progFill"></i></div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px"><span id="progText">Progress: 0%</span><span class="muted">Streak: <strong id="streak">0</strong></span></div>
+          <div style="margin-top:8px" class="controls">
+            <button id="saveProgress">Save Progress</button>
+            <button id="markToday">Mark Today's Goal Done</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <strong>🧠 Topic Mastery Check</strong>
+        <div class="muted">Rate your confidence (1=Low, 5=High)</div>
+        <div style="margin-top:10px">
+            <label>Current Topic / Chapter Name</label>
+            <input id="masteryTopic" placeholder="e.g., Quadratic Equations, VSEPR Theory">
+        </div>
+        <div style="margin-top:8px; display:flex; align-items:center; gap:10px;">
+            <label style="flex-shrink:0;">Mastery Score:</label>
+            <input id="masteryScore" type="number" min="1" max="5" value="3" style="width: 50px; text-align: center;">
+            <button id="saveMastery" style="flex:1">Save Mastery</button>
+        </div>
+        <div id="masteryList" style="margin-top:10px" class="muted small"></div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <strong>⏱ Smart Revision Timer (Pomodoro)</strong>
+            <div class="muted">Work / short break / long break</div>
+          </div>
+          <div class="flex lofi">
+            <button id="startPom">Start</button>
+            <button id="pausePom">Pause</button>
+            <button id="resetPom">Reset</button>
+          </div>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
+          <div class="time-big" id="pomTime">25:00</div>
+          <div style="flex:1">
+            <label>Session (mins)</label>
+            <input id="pomSession" type="number" value="25">
+            <label>Short Break (mins)</label>
+            <input id="pomShort" type="number" value="5">
+            <label>Long Break (mins)</label>
+            <input id="pomLong" type="number" value="15">
+          </div>
+        </div>
+        <div style="margin-top:8px" class="muted">Sessions completed today: <strong id="pomCount">0</strong></div>
+      </div>
+
+      <div class="card">
+        <strong>🃏 Flashcards</strong>
+        <div class="muted">Auto-generated from notes</div>
+        <div style="margin-top:10px" class="flash">
+          <div class="card-face" id="flashCard">No flashcards yet</div>
+          <div style="display:flex;gap:8px">
+            <button id="prevFlash">Prev</button>
+            <button id="nextFlash">Next</button>
+            <button id="flipFlash">Flip</button>
+            <button id="studyFlashSave">Save Deck</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <strong>📝 Mock Test Maker</strong>
+        <div class="muted">Generate quick 10 question MCQs from notes</div>
+        <div id="mcqArea"></div>
+        <div style="margin-top:8px" class="controls"><button id="submitMCQ">Submit Test</button><button id="saveTest">Save Test</button></div>
+        <div id="mcqResult" style="margin-top:8px"></div>
+      
+
+      <hr style="margin:12px 0;border-color:#072233">
+
+      <strong>🔔 Test Reminders</strong>
+      <div class="muted">Set reminders for upcoming tests</div>
+      <div style="margin-top:8px">
+        <label>Test Title</label>
+        <input id="testTitle" placeholder="Midterm - Physics">
+        <label>Test Date & Time</label>
+        <input id="testDate" type="datetime-local">
+        <div style="margin-top:8px" class="controls"><button id="addReminder">Add Reminder</button><button id="clearRem">Clear All</button></div>
+        <div id="remList" style="margin-top:10px"></div>
+      </div>
+
+      <hr style="margin:12px 0;border-color:#072233">
+
+      <strong>🎧 Lofi & Motivational Mode</strong>
+      <div style="margin-top:8px" class="muted">Play lofi, see quotes & celebrate</div>
+      
+      <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+        <button id="playLofi">Play Lofi</button>
+        <button id="stopLofi">Stop</button>
+      </div>
+      <div style="margin-top:8px; display:flex; align-items:center; gap:10px;">
+          <label style="flex-shrink:0; width: 100px;">Volume:</label>
+          <input type="range" id="lofiVolume" min="0" max="1" step="0.1" value="0.5" style="width:100%;">
+      </div>
+      <div style="margin-top:10px" class="controls">
+          <button id="motivateBtn">Get Quote</button>
+      </div>
+      <div id="quoteBox" style="margin-top:10px" class="muted">"Study smart — not just hard."</div>
+
+      <hr style="margin:12px 0;border-color:#072233">
+
+      <strong>⚙ Settings & Cloud</strong>
+      <div class="muted" style="margin-top:8px">Optionally connect Firebase (code commented)</div>
+      <div style="margin-top:8px" class="muted">Storage: localStorage (default).</div>
+      <div style="margin-top:10px" class="controls"><button id="exportBtn">Export Data</button><button id="importBtn">Import Data</button></div>
+
+      <footer>Project by Student (Class 11 PCM).</footer>
+    </div>
+  </div>
+
+  <audio id="lofiAudio" loop src="/lofi-study-calm-peaceful-chill-hop-112191.mp3"></audio>
+
+  <script src="main.js"></script> 
+</body>
+</html>

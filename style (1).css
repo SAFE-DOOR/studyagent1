@@ -1,0 +1,45 @@
+/* ====== Premium UI: Glassmorphism + Neon ====== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+:root{
+  --bg:#071021;
+  --card:#0f1720cc;
+  --glass:#ffffff10;
+  --accent:#00eaff;
+  --accent-2:#8b5cf6;
+  --muted:#9aa5b1;
+}
+*{box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,var(--bg) 0%, #071833 50%);color:#e6eef8;margin:0;padding:28px}
+h1{font-size:26px;margin:0 0 12px;color:var(--accent)}
+.app{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:20px}
+.left{display:flex;flex-direction:column;gap:16px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:16px;border-radius:14px;backdrop-filter:blur(6px);box-shadow:0 6px 30px rgba(2,6,23,0.6)}
+.row{display:flex;gap:12px}
+label{font-size:13px;color:var(--muted)}
+input,textarea,select{width:100%;padding:10px;border-radius:10px;border:none;background:#071827;color:#eaf6ff;outline:none}
+button{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;padding:9px 12px;border-radius:10px;color:#061018;font-weight:600;cursor:pointer;transition:transform 0.1s ease}
+button:active{transform:scale(0.98);}
+.muted{color:var(--muted);font-size:13px}
+.small{font-size:13px}
+.flex{display:flex;align-items:center;gap:10px}
+.progress{height:12px;background:#0b1220;border-radius:999px;overflow:hidden}
+.progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#7ef2ff);width:0%}
+.controls{display:flex;gap:8px;flex-wrap:wrap}
+.center{text-align:center}
+/* Flashcards */
+.flash{display:flex;flex-direction:column;gap:10px}
+.card-face{background:#06121a;padding:14px;border-radius:10px;min-height:70px}
+/* Pomodoro */
+.time-big{font-size:34px;font-weight:700}
+/* Analytics */
+canvas{max-width:100%}
+/* Mock test */
+.mcq{margin-top:8px}
+.mcq button{width:100%;text-align:left;margin-top:6px;background:#06121a;color:#eaf6ff;font-weight:400}
+.mcq button[data-selected="true"]{background:var(--accent-2);color:#061018}
+/* voice */
+.mic{padding:8px;border-radius:10px;background:#071827;border:1px dashed #11313f;color:var(--accent)}
+/* lofi */
+.lofi{display:flex;gap:8px;align-items:center}
+footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+@media(max-width:1000px){.app{grid-template-columns:1fr;}}
