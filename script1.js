@@ -8,7 +8,7 @@ let userMessage = null; // Variable to store user's message
 const inputInitHeight = chatInput.scrollHeight;
 
 // API configuration
-const API_KEY = "AIzaSyA_4rxUZqFov7UHdP35bDBLb9oGzBsITjQ"; // Your API key here
+const API_KEY = "AIzaSyD-i3a2eY8Q38N3YLrIBP-Vl6xh4EzQfEM"; // Your API key here
 const MODEL_NAME = "gemini-2.5-flash"; 
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${API_KEY}`;
 
@@ -96,6 +96,7 @@ chatInput.addEventListener("keydown", (e) => {
 sendChatBtn.addEventListener("click", handleChat);
 closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
 chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+
 
 
 
